@@ -1,6 +1,6 @@
 # Introduction to using REDIS as a JSON store
 
-The following is a document that provides information on storing JSON in redis, and the different strategies that are available with advantages and disadvantages. The examples with utilize node and the redis client to store JSON. The majority of this information comes from the amazing presentation by [https://github.com/itamarhaber](@itamarhaber)
+The following is a document that provides information on storing JSON in redis, and the different strategies that are available with advantages and disadvantages. The examples with utilize node and the redis client to store JSON. The majority of this information comes from the amazing presentation by [@itamarhaber](https://github.com/itamarhaber)
 
 ## Why did I create this README?
 
@@ -26,7 +26,7 @@ SET key value
 HMSET key obj
 ```
 
-	> Advantages
+> Advantages
 
 - Elements are accessible in O(1)
 
@@ -44,7 +44,17 @@ HMSET key obj
 JSON.SET key accessor value
 ```
 
+> Advantages:
 
+* Full JSON support
+
+* Works with any Redis client
+
+> Disadvantages
+
+* Serializing the JSON is "expensive"; transform the input JSON to a tree structure internally
+
+* Higher memory overhead
 
 ## Requirements
 
@@ -87,8 +97,8 @@ axios.get("https://gist.githubusercontent.com/oliveratgithub/0bf11a9aff0d6da7b46
   * Below we can see an example of a more complex JSON with a nested structure and null values.
 
 ```json
-exampleJSON = { address: 
-  {"location": null, person: [{"name": "Joe Smith", "age": null}, {"name": "John Doe", "age": null}]}
+exampleJSON = { "address": 
+  {"location": null, "person": [{"name": "Joe Smith", "age": null}, {"name": "John Doe", "age": null}]}
 }
 
 client.hmsetAsync("emojis-hash", exampleJSON);

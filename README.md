@@ -1,10 +1,10 @@
-# Introduction to using REDIS as a JSON store
+# Introduction to using Redis as a JSON store
 
-The following is a document that provides information on storing JSON in redis, and the different strategies that are available with advantages and disadvantages. The examples with utilize node and the redis client to store JSON. The majority of this information comes from the amazing presentation by [@itamarhaber](https://github.com/itamarhaber)
+The following is a document that provides information on storing JSON in Redis, and the different strategies that are available with advantages and disadvantages. The examples with utilize node and the Redis client to store JSON. The majority of this information comes from the amazing presentation by [@itamarhaber](https://github.com/itamarhaber)
 
 ## Why did I create this README?
 
-To give people an understanding as to the different possibilities in using REDIS as a JSON store and showing a working code that allows anyone to jump start their project. I will be querying a json endpoint and saving the json in three different ways:
+To give people an understanding as to the different possibilities in using Redis as a JSON store and showing a working code that allows anyone to jump start their project. I will be querying a json endpoint and saving the json in three different ways:
 
 **As a key- value, where the value will be the JSON:**
 
@@ -38,7 +38,7 @@ HMSET key obj
 
   ​
 
-**Using ReJSON, a module created within redis, that fully supports the JSON data type.**
+**Using ReJSON, a module created within Redis, that fully supports the JSON data type.**
 
 ```
 JSON.SET key accessor value
@@ -93,7 +93,7 @@ axios.get("https://gist.githubusercontent.com/oliveratgithub/0bf11a9aff0d6da7b46
 });
 ```
 
-* Setting the JSON as a hash. The problem with using this strategy is that only String/Number types are supported. If you have a null, or array with null values, you will be responsible with processing the data before saving in redis. With simple json, this may not be an issue, but if your JSON has many nested levels, the cleaning process can become complex; where you will end up having to use [libraries](https://github.com/hughsk/flat) to flatten the JSON, and then unflatten when retrieving from Redis.
+* Setting the JSON as a hash. The problem with using this strategy is that only String/Number types are supported. If you have a null, or array with null values, you will be responsible with processing the data before saving in Redis. With simple json, this may not be an issue, but if your JSON has many nested levels, the cleaning process can become complex; where you will end up having to use [libraries](https://github.com/hughsk/flat) to flatten the JSON, and then unflatten when retrieving from Redis.
   * Below we can see an example of a more complex JSON with a nested structure and null values.
 
 ```json

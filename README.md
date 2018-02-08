@@ -135,7 +135,30 @@ client.sendCommandAsync("JSON.GET", ["emoji-json", ".emojis[0]"]).then(reply => 
 client.sendCommandAsync("JSON.SET", ["emoji-json", ".emojis[0]", '{"name":"Example"}']).then(reply => console.log(reply))
 ```
 
+* Using npm libraries - rejson
+There are also npm libraries that allow for easier integration with rejson by providing semantically easier API than utilizing `sendCommandAsync`. One such library is [rejson](https://github.com/stockholmux/node_redis-rejson). 
+Below is an example of how to use the library to set json and get specific json keys from redis, allowing you to pull specific keys without having to read the entire json in memory.
 
+```sh
+╭─josecolella at MacBookAir in /redis-with-json-introduction
+╰─λ node                                                                                                                                                              0 < 21:22:42
+> const redis = require("redis");
+undefined
+> const rejson = require("redis-rejson")
+undefined
+> rejson(redis)
+undefined
+> const client = redis.createClient()
+undefined
+> client.json_set("message", ".", JSON.stringify({key: "Hello Redis!!"}))
+true
+> client.json_get("message", ".key", (err, payload) => {
+... console.log(payload);
+... })
+true
+> "Hello Redis!!"
+
+```
 
 ## Conclusions
 
